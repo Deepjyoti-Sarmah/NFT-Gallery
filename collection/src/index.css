@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  font-family: Manaco, Consolas, "Courier New", monospace;
+  background-color: rgb(36, 36, 36);
+  color: white;
+}
