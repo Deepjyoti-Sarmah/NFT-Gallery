@@ -10,15 +10,28 @@ function App() {
   const [provider, setProvider] = useState(null);
   const [nfts, setNfts] = useState(data);
 
-  const balance = async () => {
+  const balance = async (nft) => {
     const contract = new ethers.Contract(
-      "0xa27d1cedf3aecb7c88358caaaf4a27301e1f1a43",
+      nft.address,
       abi,
       provider
     );
     const tempBalance = contract.balanceOf(
-      "0x18992684FBeEEd5A61B48610fec6137a924cBC98"
+      account
     );
+    const tempNfts = [...nfts.list];
+    const tempNft = tempNfts[tempNfts.findIndex((obj) => obj.id == nft.id)];
+    tempNft.owner = tempBalance > 0;
+    tempNft.count = tempBalance.toString();
+    setNfts({
+      "list":tempNfts,
+    });
+  };
+
+  const checkCollection = () => {
+    data.list.forEach((nft) => {
+      balance(nft);
+    });
   };
 
   const initConnection = async () => {
@@ -37,6 +50,10 @@ function App() {
   useEffect(() => {
     initConnection();
   }, []);
+
+  useEffect(() => {
+    checkCollection();
+  }, [account]);
 
   return (
     <div className="page">
@@ -65,17 +82,26 @@ function App() {
           return (
             <div key={index} className="card">
               <div style={{ position: "relative" }}>
-                <a target={"_blank"} href= {`https://opensea.io/collection/${nft.link}`}></a>
+                <a
+                  target={"_blank"}
+                  href={`https://opensea.io/collection/${nft.link}`}
+                ></a>
                 <img
                   className="cardImage"
                   src={require("./assets/images/opensea-logo.png")}
                   alt=""
                 />
+                <GiBoltSpellCast
+                  className="cardImage"
+                  style={{ opacity: nft.owner ? 1 : 0.2 }}
+                />
+                <p className="counter">{nft.count}</p>
               </div>
               <img
                 className="nftImage"
                 src={require(`./assets/images/${nft.id}.${nft.type}`)}
                 alt=""
+                style={{ opacity: nft.owner ? 1 : 0.2 }}
               />
               <p className="nftText">{nft.name}</p>
             </div>

@@ -65,3 +65,10 @@
   height: 30px;
   margin: 0px, 5px, 5px;   
 }
+
+.counter {
+  position: absolute;
+  top: 15px;
+  right: -8px;
+  font-size: 12px
+}
