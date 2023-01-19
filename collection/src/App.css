@@ -26,3 +26,42 @@
   width: 20px;
   height: 20px;
 }
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 10px;
+  padding-top: 15px;
+}
+
+.nftImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 5px;
+}
+
+.nftText {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.card{
+  width: clamp(120px, 30vw, 200px);
+  height: 200px;
+  padding: 2px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
+
+.cardImage{
+  width: 30px;
+  height: 30px;
+  margin: 0px, 5px, 5px;   
+}
